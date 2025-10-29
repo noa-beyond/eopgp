@@ -5,7 +5,6 @@ This folder contains the necessary files to deploy and manage the cluster infras
 ## Contents
 
 - **Terraform**:  
-  Contains scripts to provision the cluster infrastructure (VMs, networking, etc.).
   - `main.tf` – main Terraform configuration  
   - `variables.tf` – input variables  
   - `terraform.tfvars` – example variable values  
