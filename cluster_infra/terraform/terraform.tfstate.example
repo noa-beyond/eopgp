@@ -1,0 +1,61 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.8",
+  "serial": 1,
+  "lineage": "b113d98f-145e-a47e-36b4-e3d06255fd60",
+  "outputs": {
+    "cluster_id": {
+      "value": "5777dbd0-96a6-43f8-85cb-437191f68fc7",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "openstack_containerinfra_cluster_v1",
+      "name": "my_cluster",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_address": "****",
+            "cluster_template_id": "76004146-b8b2-47be-83f1-e9a3a5dc48d7",
+            "coe_version": "v1.30.10",
+            "create_timeout": 60,
+            "created_at": "2025-05-13T11:14:15Z",
+            "flavor": "eo2a.large",
+            "floating_ip_enabled": false,
+            "id": "5777dbd0-96a6-43f8-85cb-437191f68fc7",
+            "keypair": "NoaK8s",
+            "kubeconfig": "****",
+            "labels": {
+              "auto_healing_enabled": "True",
+              "auto_scaling_enabled": "True",
+              "availability_zone": "nova",
+              "container_infra_prefix": "registry-public.cloudferro.com/magnum",
+              "eodata_access_enabled": "True",
+              "fixed_subnet_cidr": "192.168.24.0/24",
+              "ingress_controller": "nginx",
+              "kube_tag": "v1.30.10",
+              "lb_api_flavor": "HA-medium",
+              "manila_csi_enabled": "false",
+              "max_node_count": "7",
+              "min_node_count": "1"
+            },
+            "master_count": 3,
+            "master_flavor": "eo2a.large",
+            "name": "NoaK8s",
+            "node_count": 3,
+            "project_id": "****",
+            "region": "WAW4-1",
+            "stack_id": "kube-8n4bl",
+            "updated_at": "2025-08-06T11:17:33Z",
+            "user_id": "****"
+          }
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

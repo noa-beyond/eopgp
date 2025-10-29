@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chdm-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: block-ssd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chdm
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chdm
+  template:
+    metadata:
+      labels:
+        app: chdm
+    spec:
+      nodeSelector:
+        magnum.openstack.org/worker-eodata: enabled
+      containers:
+        - name: chdm
+          image: ghcr.io/noa-beyond/noa-change-detection-mapping:v0.15.2
+          envFrom:
+            - secretRef:
+                name: creodias-secret
+          args: ["--log", "INFO", "noa-pgaas-chdm", "--output_path", "/app/data/output", "-v", "/app/config/config_service.json"]
+          volumeMounts:
+            - name: block-ssd-storage
+              mountPath: /app/data
+            - name: config-volume
+              mountPath: /app/config/config_service.json
+              subPath: config_service.json
+            - name: eodata-volume
+              mountPath: /eodata
+              readOnly: true
+            - name: noa
+              mountPath: /mnt/s3-mount-point
+              readOnly: false    
+      volumes:
+        - name: block-ssd-storage
+          persistentVolumeClaim:
+            claimName: chdm-pvc
+        - name: config-volume
+          configMap:
+            name: chdm-config
+        - name: eodata-volume
+          hostPath:
+            path: /eodata
+        - name: noa
+          hostPath:
+            path: /mnt/s3-mount-point
+            type: Directory
+      imagePullSecrets:
+        - name: ghcr-secret

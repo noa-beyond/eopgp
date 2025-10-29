@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hubmanager
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hubmanager
+  template:
+    metadata:
+      labels:
+        app: hubmanager
+    spec:
+      containers:
+        - name: hubmanager
+          image: ghcr.io/noa-beyond/hubmanager:v1.1.8
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka1:9092"
+            - name: POSTGRES_DB
+              value: "Server=postgres-service;Database=postgres;User Id=postgres;Password=postgres123;"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config/appsettings.json
+              subPath: appsettings_hubmanager.json
+            - name: logs-volume
+              mountPath: /app/logs
+      volumes:
+        - name: config-volume
+          configMap:
+            name: hubmanager-config
+        - name: logs-volume
+          emptyDir: {}      
+      imagePullSecrets:
+        - name: ghcr-secret
+
