@@ -50,16 +50,13 @@ The deployment is **cloud-native**, built around:
 2. **Sentinel-2 Preprocess Processor**  
    Reprojects, clips and prepares data for analysis (ARD generation).  
 
-3. **Indices Generation Processor**  
-   Computes NDVI, NDMI and other Level-3 vegetation indices.  
-
-4. **Change Detection ML Processor** 
+3. **Change Detection ML Processor** 
    Utilizes ML models to detect temporal changes in land-surface conditions.  
 
-5. **Zarr Format Integration**  
+4. **Zarr Format Integration**  
    Enables parallel, memory-efficient processing with `xarray` and `dask`.  
 
-6. **STAC Catalogue Generation**  
+5. **STAC Catalogue Generation**  
    Indexes products into pgSTAC, ensuring FAIR data access via standard APIs.  
 
 ## Data Format Evaluation: Zarr vs COG vs GeoTIFF
@@ -81,7 +78,7 @@ The entire flow is **automated, reproducible and extensible**.
 ## Outcome
 EOPGP delivers a **production-ready EO data ecosystem** that:
 - Runs on **public cloud infrastructure** with elastic scalability.  
-- Implements **modern DevOps and CI/CD** practices.  
+- Implements **State of the art DevOps and CI/CD** practices.  
 - Supports **AI-ready, FAIR-compliant, and interoperable** workflows.  
 - Provides a **foundation for continuous evolution** of EO services.
 
@@ -118,22 +115,22 @@ EOPGP adheres to the **FAIR data principles**:
 | **Reusable** | Modular, versioned products with transparent provenance. |
 
 
-## Hypothetical Use Scenario
+## Use Scenario
 
 ### Researcher Perspective
 A **climate researcher** defines a study area in Thessaly and selects a time range covering 2023–2025 through the web UI.  
 The pipeline automatically:
-1. Searches and downloads Sentinel-1 and Sentinel-2 data.  
+1. Searches and downloads Sentinel-2 data.  
 2. Preprocesses and harmonizes them into Zarr and COG formats.  
-3. Runs the **indices generation** and **change detection ML** processors.  
+3. Runs the **change detection ML** processors.  
 4. Publishes results in the **STAC catalog**, accessible via Jupyter notebooks. 
 
-The researcher loads directly the zarr via S3 and visualizes NDVI change trends in **QGIS**, exports the results to a CSV and integrates them into a scientific publication.
+The researcher loads directly the zarr via S3 and visualizes change trends in **QGIS**, exports the results to a CSV and integrates them into a scientific publication.
 
-### 🛰️ Decision-Maker Perspective
+### Decision-Maker Perspective
 A **regional authority** uses the same platform for post-fire monitoring.  
-Without technical expertise, the user selects an AOI and triggers a “change analysis” workflow.  
-Within minutes, they receive:
+Without infrastructure technical expertise, the user selects an AOI and triggers a **change analysis** workflow.  
+As a resulting outcome, they receive:
 - A **change timeline**, and  
 - A **link to the STAC catalog** for downloading results.  
 
