@@ -98,7 +98,7 @@ New services can be introduced by:
 3. Publishing results through pgSTAC.  
 
 **Planned extensions include:**
-- Deep learning–based cloud-gap filling.  
+- Deep learning–based cloud-gap filling for mosaicing.  
 - Multi-mission data fusion and Level-4 products.  
 - Interactive dashboards for near-real-time monitoring.  
 
