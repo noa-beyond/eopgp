@@ -1,0 +1,5 @@
+os_username = "example@example.gr"
+os_password = "example_password"
+os_region_name = "WAW4-1"
+os_project_name = "example_cloud_PROJECT_ID"
+os_auth_url = "https://keystone.cloudferro.com:5000/v3"

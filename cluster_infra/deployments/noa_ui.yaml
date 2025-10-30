@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noaui
+  namespace: default
+  labels:
+    app: noaui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: noaui
+  template:
+    metadata:
+      labels:
+        app: noaui
+    spec:
+      nodeSelector:
+        magnum.openstack.org/worker-eodata: enabled
+      containers:
+        - name: noaui
+          image: ghcr.io/noa-beyond/pgaas-ui-img:v1.1.45
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          envFrom:
+            - secretRef:
+                name: stacdb-secret
+            - secretRef:
+                name: s3-secret
+          volumeMounts:
+            - name: eodata-volume
+              mountPath: /eodata
+              readOnly: true
+            - name: stac
+              mountPath: /app/static/stac
+              readOnly: true
+            - name: config-ui
+              mountPath: /app/static/js/config.json
+              subPath: config.json
+      volumes:
+        - name: eodata-volume
+          hostPath:
+            path: /eodata
+        - name: stac
+          hostPath:
+            path: /mnt/s3-stac
+            type: Directory
+        - name: config-ui
+          configMap:
+            name: ui-config
+      imagePullSecrets:
+        - name: ghcr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noaui-service
+  namespace: default
+  labels:
+    app: noaui
+spec:
+  selector:
+    app: noaui
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
+
