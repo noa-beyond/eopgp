@@ -1,0 +1,9 @@
+{
+  "api": {
+    "baseUrl": "http://gateway-service/api/",
+    "endpoints": {
+      "searchProducts": "satellite-products/search",
+      "changeMapping": "orders/ch-mapping"
+    }
+  }
+}
