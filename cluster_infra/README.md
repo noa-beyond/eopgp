@@ -9,7 +9,6 @@ This folder contains the necessary files to deploy and manage the cluster infras
   - `variables.tf` – input variables  
   - `terraform.tfvars` – example variable values  
   - `terraform.tfstate.example` – example state file  
-  - `.terraform.lock.hcl`
 
 - **Deployments**:  
   Kubernetes deployment YAMLs for all services in the cluster.  
