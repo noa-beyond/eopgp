@@ -20,7 +20,7 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: "kafka1:9092"
             - name: POSTGRES_DB
-              value: "Server=postgres-service;Database=postgres;User Id=postgres;Password=postgres123;"
+              value: "Server=postgres-service;Database=postgres;User Id=****;Password=****;"
           volumeMounts:
             - name: config-volume
               mountPath: /app/config/appsettings.json
